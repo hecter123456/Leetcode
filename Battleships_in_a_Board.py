@@ -11,18 +11,11 @@ class unitest(unittest.TestCase):
 class Solution():
     def countBattleships(self,board):
         battleship = 0
-        preboard = set()
-        for line in board:
-            for idx,slot in enumerate(line):
-                if(slot == 'X'):
-                    if(idx not in preboard):
-                        if(idx-1 not in preboard):
-                            battleship+=1
-                        preboard.add(idx)
-                else:
-                    if(idx in preboard):
-                        preboard.remove(idx)
-        return battleship;
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                if board[i][j] == 'X' and (i == 0 or board[i-1][j] == '.') and (j == 0 or board[i][j-1] == '.'):
+                    battleship+=1
+        return battleship
 
 if __name__ == '__main__':
     unittest.main()
